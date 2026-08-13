@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-shop
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: coffee-shop
+
+  template:
+    metadata:
+      labels:
+        app: coffee-shop
+
+    spec:
+      containers:
+        - name: coffee-shop
+          image: <YOUR_DOCKERHUB_USERNAME>/coffee-shop:1.0
+
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: coffee-shop-secret
+                  key: ADMIN_TOKEN
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
