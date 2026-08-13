@@ -1,0 +1,51 @@
+sudo apt install npm -y
+npm inistall express
+
+vim server.js
+vim package.json
+or 
+
+mkdir coffee-shop
+cd coffee-shop
+
+npm init -y
+npm install express
+
+testing 
+--------
+npm start
+
+testing url 
+---------------
+curl http://ipaddress:3000/api/admin/orders
+
+
+with creadentials
+--------------------
+curl -H "Authorization: Bearer my-secret-token" \
+http://localhost:3000/api/admin/orders
+
+
+git login -username -passwrod
+git init
+git remote add
+git add .
+git commit -m " project"
+git push orgin main
+
+
+creating Docker images
+---------------------------
+docker run 
+docker tag
+docker push 
+
+creating kubernets
+-----------------------
+k create secrets.yaml
+k create -f deployment.yaml
+k create -f service.yaml
+k create -f ingress.yaml
+
+https\\coffee.com expose my application 
+docker push 
